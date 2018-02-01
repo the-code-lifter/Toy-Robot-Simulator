@@ -10,12 +10,16 @@ module.exports = class FileReader {
   loadFile(cb) {
     fs.readFile(filePath, { encoding: 'utf-8' }, (err, commands) => {
       if (!err) {
-        this.file = commands.toString().trim()
+        this.setData(commands)
         cb()
       } else {
         throw Error(err)
       }
     })
+  }
+
+  setData(fileData) {
+    this.file = fileData.toString().trim()
   }
 
   getData() {
