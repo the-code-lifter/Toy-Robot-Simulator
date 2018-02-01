@@ -1,0 +1,17 @@
+{
+  "name": "toy-robot-simulator",
+  "version": "1.0.0",
+  "description": "This is a simulation of a toy robot moving on a square tabletop with the dimensions of 5 units x 5 units.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "toy",
+    "robot",
+    "node",
+    "simulator"
+  ],
+  "author": "Jake Rossi",
+  "license": "ISC"
+}
