@@ -1,9 +1,50 @@
-const splitCommandsIntoArray = commands => {
-  if (!(typeof commands === 'string')) throw Error('The parameter passed to splitCommandsIntoArray function must be a String')
+const directionsAllowed = [ 'NORTH', 'SOUTH', 'WEST', 'EAST' ]
 
-  return commands.split('\n')
+const getPlacementDirections = (placementCommand) =>
+	placementCommand.split(' ').slice(-1).join().split(',')
+
+const isValidPlace = (place, tableSize) => {
+	const [ x, y, direction ] = place
+
+	if (x > tableSize.width || x < 0) return false
+	if (x > tableSize.height || x < 0) return false
+
+	if (y > tableSize.width || y < 0) return false
+	if (y > tableSize.height || y < 0) return false
+
+	if (directionsAllowed.indexOf(direction) === -1) return false
+
+	return true
+}
+
+const splitCommandsIntoArray = (commands) => {
+	if (!(typeof commands === 'string'))
+		throw Error('The parameter passed to splitCommandsIntoArray function must be a String')
+
+	return commands.split('\n')
+}
+
+const runCommand = (command, tableSize) => {
+	if (!(typeof command === 'string'))
+		throw Error('The parameter passed to runCommand function must be a String')
+
+	if (command.indexOf('PLACE') > -1) {
+		const placementDirections = getPlacementDirections(command)
+
+		return isValidPlace(placementDirections, tableSize)
+			? console.log(placementDirections)
+			: console.log('nope')
+	}
+
+	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
+		return console.log('Turn command')
+	if (command.indexOf('MOVE') > -1) return console.log(' Move forward command')
+	if (command.indexOf('REPORT') > -1) return console.log('Report command')
+
+	console.log(`${command} is an unknown to the Robot`)
 }
 
 module.exports = {
-  splitCommandsIntoArray
+	splitCommandsIntoArray,
+	runCommand,
 }

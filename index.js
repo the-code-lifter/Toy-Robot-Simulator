@@ -1,18 +1,20 @@
 const FileReader = require('./Models/FileReader')
 const Table = require('./Models/Table')
-const { splitCommandsIntoArray } = require('./Helpers/Commands')
+const { splitCommandsIntoArray, runCommand } = require('./Helpers/Commands')
 
 const fileReader = new FileReader()
 const table = new Table()
+const tableSize = {
+	width: 5,
+	height: 5,
+}
 
 fileReader.loadFile(() => {
-  const commands = fileReader.getData()
+	const commands = fileReader.getData()
 
-  table.createTable(5, 5)
+	table.createTable(tableSize.width, tableSize.height)
 
-  const arrayOfCommands = splitCommandsIntoArray(commands)
+	const arrayOfCommands = splitCommandsIntoArray(commands)
 
-  arrayOfCommands.forEach(element => {
-    console.log(element)
-  });
+	arrayOfCommands.forEach((command) => runCommand(command, tableSize))
 })
