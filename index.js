@@ -6,6 +6,8 @@ const table = new Table()
 
 fileReader.loadFile(() => {
   const commands = fileReader.getData()
-  table.createTable()
+
+  table.createTable(5, 5)
+
   console.log(table.getTable())
 })
