@@ -5,7 +5,7 @@ module.exports = class Table {
   }
 
   convertArrayToString(array) {
-    if (!(array instanceof Array)) return false
+    if (!(array instanceof Array)) throw Error('The parameter passed to convertArrayToString method must be a Array')
     return array.toString()
   }
 
@@ -15,7 +15,7 @@ module.exports = class Table {
   }
 
   throwIntError() {
-    throw Error('The parameter passed to this method is not valid must be a Int')
+    throw Error('The parameter passed to validParam method must be a Integer')
   }
 
   createTable(width, height) {

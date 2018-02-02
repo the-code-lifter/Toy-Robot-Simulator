@@ -1,5 +1,6 @@
 const FileReader = require('./Models/FileReader')
 const Table = require('./Models/Table')
+const { splitCommandsIntoArray } = require('./Helpers/Commands')
 
 const fileReader = new FileReader()
 const table = new Table()
@@ -9,5 +10,9 @@ fileReader.loadFile(() => {
 
   table.createTable(5, 5)
 
-  console.log(table.getTable())
+  const arrayOfCommands = splitCommandsIntoArray(commands)
+
+  arrayOfCommands.forEach(element => {
+    console.log(element)
+  });
 })
