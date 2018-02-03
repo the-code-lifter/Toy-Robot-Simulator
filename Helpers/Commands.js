@@ -15,9 +15,6 @@ const isValidPlace = (place, table) => {
 	const { width, height } = table.getTableDiameters()
 
 	if (x > width - 1 || x < 0) return false
-	if (x > height - 1 || x < 0) return false
-
-	if (y > width - 1 || y < 0) return false
 	if (y > height - 1 || y < 0) return false
 
 	if (directionsAllowed.indexOf(direction) === -1) return false
@@ -41,7 +38,7 @@ const runCommand = (command, table, robot) => {
 		return isValidPlace(placementDirections, table) ? robot.place(placementDirections) : false
 	}
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1) return robot.turn(command)
-	if (command.indexOf('MOVE') > -1) return robot.move()
+	if (command.indexOf('MOVE') > -1) return robot.move(table)
 	if (command.indexOf('REPORT') > -1) return robot.report()
 
 	console.log(`${command} is an unknown to the Robot`)
