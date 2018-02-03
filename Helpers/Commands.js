@@ -1,10 +1,17 @@
 const directionsAllowed = [ 'NORTH', 'SOUTH', 'WEST', 'EAST' ]
 
-const getPlacementDirections = (placementCommand) =>
-	placementCommand.split(' ').slice(-1).join().split(',')
+const getPlacementDirections = (placementCommand) => {
+	const [ x, y, direction ] = placementCommand.split(' ').slice(-1).join().split(',')
+
+	return {
+		x,
+		y,
+		direction,
+	}
+}
 
 const isValidPlace = (place, tableSize) => {
-	const [ x, y, direction ] = place
+	const { x, y, direction } = place
 
 	if (x > tableSize.width || x < 0) return false
 	if (x > tableSize.height || x < 0) return false
@@ -24,16 +31,16 @@ const splitCommandsIntoArray = (commands) => {
 	return commands.split('\n')
 }
 
-const runCommand = (command, tableSize) => {
+const runCommand = (command, table, robot) => {
 	if (!(typeof command === 'string'))
 		throw Error('The parameter passed to runCommand function must be a String')
 
 	if (command.indexOf('PLACE') > -1) {
 		const placementDirections = getPlacementDirections(command)
 
-		return isValidPlace(placementDirections, tableSize)
-			? console.log(placementDirections)
-			: console.log('nope')
+		return isValidPlace(placementDirections, table.getTableSize)
+			? robot.place(placementDirections, table)
+			: false
 	}
 
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
