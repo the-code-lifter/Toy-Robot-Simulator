@@ -1,35 +1,28 @@
+const validParam = (param) => {
+	if (!Number.isInteger(param)) return false
+	return true
+}
+
+const throwIntError = () => {
+	throw Error('The parameter passed to validParam method must be a Integer')
+}
+
 module.exports = class Table {
 	constructor() {
-		this.tableSize = {
-			width: null,
-			height: null,
-		}
-	}
-
-	validParam(param) {
-		if (!Number.isInteger(param)) return false
-		return true
-	}
-
-	throwIntError() {
-		throw Error('The parameter passed to validParam method must be a Integer')
+		this.width = null
+		this.height = null
 	}
 
 	createTable(width, height) {
-		if (width === undefined || !this.validParam(width)) this.throwIntError()
-		if (height === undefined || !this.validParam(height)) this.throwIntError()
+		if (width === undefined || !validParam(width)) throwIntError()
+		if (height === undefined || !validParam(height)) throwIntError()
 
-		this.tableSize = {
-			width,
-			height,
-		}
+		this.width = width
+		this.height = height
 	}
 
-	getTable() {
-		return this.table
-	}
-
-	getTableSize() {
-		return this.tableSize
+	getTableDiameters() {
+		const { width, height } = this
+		return { width, height }
 	}
 }

@@ -10,14 +10,15 @@ const getPlacementDirections = (placementCommand) => {
 	}
 }
 
-const isValidPlace = (place, tableSize) => {
+const isValidPlace = (place, table) => {
 	const { x, y, direction } = place
+	const { width, height } = table.getTableDiameters()
 
-	if (x > tableSize.width || x < 0) return false
-	if (x > tableSize.height || x < 0) return false
+	if (x > table.width || x < 0) return false
+	if (x > table.height || x < 0) return false
 
-	if (y > tableSize.width || y < 0) return false
-	if (y > tableSize.height || y < 0) return false
+	if (y > table.width || y < 0) return false
+	if (y > table.height || y < 0) return false
 
 	if (directionsAllowed.indexOf(direction) === -1) return false
 
@@ -37,17 +38,11 @@ const runCommand = (command, table, robot) => {
 
 	if (command.indexOf('PLACE') > -1) {
 		const placementDirections = getPlacementDirections(command)
-
-		return isValidPlace(placementDirections, table.getTableSize)
-			? robot.place(placementDirections)
-			: false
+		return isValidPlace(placementDirections, table) ? robot.place(placementDirections) : false
 	}
-
+	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1) return robot.turn(command)
 	if (command.indexOf('MOVE') > -1) return robot.move()
 	if (command.indexOf('REPORT') > -1) return robot.report()
-
-	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
-		return robot.turn(command, table)
 
 	console.log(`${command} is an unknown to the Robot`)
 }
