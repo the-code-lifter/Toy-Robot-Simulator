@@ -1,16 +1,19 @@
 module.exports = class Robot {
 	constructor() {
 		this.currentPosition = {
-			x: 0,
-			y: 0,
+			x: '',
+			y: '',
 			direction: '',
 		}
 	}
 
+	hasBeenPlaced() {
+		const { x, y, direction } = this.currentPosition
+		return !(x === 0 && y === 0 && direction === '')
+	}
+
 	place(placementDirections, table) {
-		table.removePosition(this.currentPosition)
 		this.currentPosition = placementDirections
-		table.setPosition(placementDirections)
 	}
 
 	move() {
@@ -41,11 +44,44 @@ module.exports = class Robot {
 
 		return !this.hasBeenPlaced()
 			? process.stdout.write('Robot has not been placed\n')
-			: process.stdout.write(`Output: ${[ x, y, direction ].join(', ')}\n`)
+			: process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
 	}
 
-	hasBeenPlaced() {
-		const { x, y, direction } = this.currentPosition
-		return !(x === 0 && y === 0 && direction === '')
+	turn(rotation) {
+		if (!this.hasBeenPlaced) return
+
+		if (rotation === 'LEFT') {
+			switch (this.currentPosition.direction) {
+				case 'NORTH':
+					this.currentPosition.direction = 'WEST'
+					break
+				case 'EAST':
+					this.currentPosition.direction = 'NORTH'
+					break
+				case 'SOUTH':
+					this.currentPosition.direction = 'EAST'
+					break
+				case 'WEST':
+					this.currentPosition.direction = 'SOUTH'
+					break
+			}
+		} else {
+			switch (this.currentPosition.direction) {
+				case 'NORTH':
+					this.currentPosition.direction = 'EAST'
+					break
+				case 'EAST':
+					this.currentPosition.direction = 'SOUTH'
+					break
+				case 'SOUTH':
+					this.currentPosition.direction = 'WEST'
+					break
+				case 'WEST':
+					this.currentPosition.direction = 'NORTH'
+					break
+			}
+
+			console.log(this.currentPosition)
+		}
 	}
 }

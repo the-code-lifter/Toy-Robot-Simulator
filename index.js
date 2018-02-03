@@ -9,9 +9,7 @@ const robot = new Robot()
 
 fileReader.loadFile(() => {
 	const commands = fileReader.getData()
-
 	table.createTable(5, 5)
-
 	const arrayOfCommands = splitCommandsIntoArray(commands)
 
 	arrayOfCommands.forEach((command) => runCommand(command, table, robot))

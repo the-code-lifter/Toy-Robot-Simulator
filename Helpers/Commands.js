@@ -39,16 +39,15 @@ const runCommand = (command, table, robot) => {
 		const placementDirections = getPlacementDirections(command)
 
 		return isValidPlace(placementDirections, table.getTableSize)
-			? robot.place(placementDirections, table)
+			? robot.place(placementDirections)
 			: false
 	}
 
 	if (command.indexOf('MOVE') > -1) return robot.move()
-
 	if (command.indexOf('REPORT') > -1) return robot.report()
 
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
-		return console.log('Turn command')
+		return robot.turn(command, table)
 
 	console.log(`${command} is an unknown to the Robot`)
 }
