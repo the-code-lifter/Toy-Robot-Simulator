@@ -43,10 +43,11 @@ const runCommand = (command, table, robot) => {
 			: false
 	}
 
+	if (command.indexOf('REPORT') > -1) return robot.report()
+
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
 		return console.log('Turn command')
 	if (command.indexOf('MOVE') > -1) return console.log(' Move forward command')
-	if (command.indexOf('REPORT') > -1) return console.log('Report command')
 
 	console.log(`${command} is an unknown to the Robot`)
 }

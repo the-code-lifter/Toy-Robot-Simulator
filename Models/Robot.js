@@ -1,9 +1,9 @@
 module.exports = class Robot {
 	constructor() {
 		this.currentPosition = {
-			x: null,
-			y: null,
-			direction: null,
+			x: 0,
+			y: 0,
+			direction: '',
 		}
 	}
 
@@ -11,5 +11,13 @@ module.exports = class Robot {
 		table.removePosition(this.currentPosition)
 		this.currentPosition = placementDirections
 		table.setPosition(placementDirections)
+	}
+
+	report() {
+		const { x, y, direction } = this.currentPosition
+
+		return x === 0 && y === 0 && direction === ''
+			? process.stdout.write('Robot has not been placed\n')
+			: process.stdout.write(`Output: ${[ x, y, direction ].join(', ')}\n`)
 	}
 }
