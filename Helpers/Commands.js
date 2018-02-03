@@ -14,11 +14,11 @@ const isValidPlace = (place, table) => {
 	const { x, y, direction } = place
 	const { width, height } = table.getTableDiameters()
 
-	if (x > table.width || x < 0) return false
-	if (x > table.height || x < 0) return false
+	if (x > width - 1 || x < 0) return false
+	if (x > height - 1 || x < 0) return false
 
-	if (y > table.width || y < 0) return false
-	if (y > table.height || y < 0) return false
+	if (y > width - 1 || y < 0) return false
+	if (y > height - 1 || y < 0) return false
 
 	if (directionsAllowed.indexOf(direction) === -1) return false
 

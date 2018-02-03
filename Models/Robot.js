@@ -9,7 +9,7 @@ module.exports = class Robot {
 
 	hasBeenPlaced() {
 		const { x, y, direction } = this.currentPosition
-		return !(x === 0 && y === 0 && direction === '')
+		return !(x === '' && y === '' && direction === '')
 	}
 
 	place(placementDirections, table) {
@@ -41,10 +41,8 @@ module.exports = class Robot {
 
 	report() {
 		const { x, y, direction } = this.currentPosition
-
-		return !this.hasBeenPlaced()
-			? process.stdout.write('Robot has not been placed\n')
-			: process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
+		if (this.hasBeenPlaced())
+			process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
 	}
 
 	turn(rotation) {
@@ -80,8 +78,6 @@ module.exports = class Robot {
 					this.currentPosition.direction = 'NORTH'
 					break
 			}
-
-			console.log(this.currentPosition)
 		}
 	}
 }
