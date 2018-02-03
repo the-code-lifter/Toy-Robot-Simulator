@@ -28,7 +28,7 @@ const splitCommandsIntoArray = (commands) => {
 	if (!(typeof commands === 'string'))
 		throw Error('The parameter passed to splitCommandsIntoArray function must be a String')
 
-	return commands.split('\n')
+	return commands.toUpperCase().split('\n')
 }
 
 const runCommand = (command, table, robot) => {
@@ -43,11 +43,12 @@ const runCommand = (command, table, robot) => {
 			: false
 	}
 
+	if (command.indexOf('MOVE') > -1) return robot.move()
+
 	if (command.indexOf('REPORT') > -1) return robot.report()
 
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1)
 		return console.log('Turn command')
-	if (command.indexOf('MOVE') > -1) return console.log(' Move forward command')
 
 	console.log(`${command} is an unknown to the Robot`)
 }
