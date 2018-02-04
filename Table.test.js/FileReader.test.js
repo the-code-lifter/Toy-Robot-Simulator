@@ -13,7 +13,7 @@ describe('FileReader', () => {
 	it('loadFile method should return Callback once file has been loaded', () => {
 		const cb = sinon.spy()
 		fileReader.loadFile(cb)
-		expect(cb.calledOnce).to.be.true
+		expect(cb.called).to.be.true
 	})
 
 	it('setData method should set this.file', () => {
@@ -21,7 +21,8 @@ describe('FileReader', () => {
 		expect(fileReader.file).to.equal('PLACE 0,0,NORTH')
 	})
 
-	it('getData method should return ', () => {
+	it('getData method should return this.file data', () => {
+		fileReader.setData('PLACE 0,0,NORTH')
 		expect(fileReader.getData()).to.equal('PLACE 0,0,NORTH')
 	})
 })
