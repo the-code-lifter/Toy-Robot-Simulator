@@ -26,22 +26,23 @@ module.exports = class Robot {
 
 		switch (this.currentPosition.direction) {
 			case 'NORTH':
-				this.currentPosition.y = y === table.height ? y : (y + 1).toString()
+				this.currentPosition.y = y === table.height ? this.currentPosition.y : (y + 1).toString()
 				break
 			case 'SOUTH':
-				this.currentPosition.y = y === 0 ? y : (y - 1).toString()
+				this.currentPosition.y = y === 0 ? this.currentPosition.y : (y - 1).toString()
 				break
 			case 'EAST':
-				this.currentPosition.x = x === table.width ? x : (x + 1).toString()
+				this.currentPosition.x = x === table.width ? this.currentPosition.x : (x + 1).toString()
 				break
 			case 'WEST':
-				this.currentPosition.x = x === 0 ? x : (x - 1).toString()
+				this.currentPosition.x = x === 0 ? this.currentPosition.x : (x - 1).toString()
 				break
 		}
 	}
 
 	report() {
 		const { x, y, direction } = this.currentPosition
+
 		if (this.hasBeenPlaced())
 			process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
 	}

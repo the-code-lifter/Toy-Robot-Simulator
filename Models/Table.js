@@ -23,6 +23,7 @@ module.exports = class Table {
 
 	getTableDiameters() {
 		const { width, height } = this
+
 		return { width, height }
 	}
 }
