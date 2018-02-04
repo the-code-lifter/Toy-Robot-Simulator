@@ -37,6 +37,7 @@ const runCommand = (command, table, robot) => {
 		const placementDirections = getPlacementDirections(command)
 		if (isValidPlace(placementDirections, table)) return robot.place(placementDirections)
 	}
+
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1) return robot.turn(command)
 	if (command.indexOf('MOVE') > -1) return robot.move(table)
 	if (command.indexOf('REPORT') > -1) return robot.report()

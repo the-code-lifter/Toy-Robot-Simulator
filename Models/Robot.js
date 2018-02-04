@@ -45,9 +45,8 @@ module.exports = class Robot {
 	report() {
 		const { x, y, direction } = this.currentPosition
 
-		if (this.hasBeenPlaced()) {
+		if (this.hasBeenPlaced())
 			process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
-		}
 	}
 
 	turn(rotation) {

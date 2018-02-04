@@ -100,7 +100,7 @@ describe('Robot', () => {
 				direction: 'NORTH',
 			}
 
-			table.createTable(1, 1)
+			table.createTable(2, 2)
 
 			robot.place(placeOffTable)
 			robot.move(table)
@@ -131,15 +131,7 @@ describe('Robot', () => {
 	})
 
 	describe('report method', () => {
-		let output
 		const write = process.stdout.write
-
-		beforeEach(() => {
-			output = ''
-			process.stdout.write = (message) => {
-				output += message
-			}
-		})
 
 		afterEach(() => {
 			process.stdout.write = write
@@ -147,13 +139,17 @@ describe('Robot', () => {
 
 		it('report method should output current position to the terminal', () => {
 			const robot = new Robot()
+			process.stdout.write = (message) => {}
+			let spy = sinon.spy(process.stdout, 'write')
+
 			robot.place({
 				x: '1',
 				y: '3',
 				direction: 'NORTH',
 			})
 
-			expect(output).to.equal('Current position: 1, 3, NORTH')
+			robot.report()
+			expect(spy.called).to.be.true
 		})
 	})
 
