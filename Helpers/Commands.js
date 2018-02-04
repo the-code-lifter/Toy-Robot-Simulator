@@ -10,7 +10,7 @@ const getPlacementDirections = (placementCommand) => {
 	}
 }
 
-const isValidPlace = (place, table) => {
+const isValidPlace = (place, table, robot) => {
 	const { x, y, direction } = place
 	const { width, height } = table.getTableDiameters()
 
@@ -40,8 +40,6 @@ const runCommand = (command, table, robot) => {
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1) return robot.turn(command)
 	if (command.indexOf('MOVE') > -1) return robot.move(table)
 	if (command.indexOf('REPORT') > -1) return robot.report()
-
-	console.log(`${command} is an unknown to the Robot`)
 }
 
 module.exports = {
