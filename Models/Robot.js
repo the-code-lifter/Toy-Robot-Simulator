@@ -12,12 +12,13 @@ module.exports = class Robot {
 		return !(x === '' && y === '' && direction === '')
 	}
 
-	place(placementDirections, table) {
+	place(placementDirections) {
 		this.currentPosition = placementDirections
 	}
 
 	move(table) {
 		if (!this.hasBeenPlaced) return
+		if (table === undefined) return
 
 		let { x, y, direction } = this.currentPosition
 
@@ -43,8 +44,9 @@ module.exports = class Robot {
 	report() {
 		const { x, y, direction } = this.currentPosition
 
-		if (this.hasBeenPlaced())
+		if (this.hasBeenPlaced()) {
 			process.stdout.write(`Current position: ${[ x, y, direction ].join(', ')}\n`)
+		}
 	}
 
 	turn(rotation) {
