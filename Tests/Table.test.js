@@ -13,7 +13,7 @@ describe('Table', () => {
 		expect(table.height).to.be.null
 	})
 
-	describe('createTable', () => {
+	describe('createTable method', () => {
 		it('should set this.width and this.height', () => {
 			const table = new Table()
 
@@ -23,7 +23,7 @@ describe('Table', () => {
 			expect(table.height).to.equal(5)
 		})
 
-		it('called without params should throw throwIntError Error', () => {
+		it('called without parameters should throw throwIntError Error', () => {
 			const table = new Table()
 
 			expect(() => table.createTable()).to.throw(
@@ -49,7 +49,9 @@ describe('Table', () => {
 
 	it('getTableDiameters method should return width and height of table in a Object', () => {
 		const table = new Table()
+
 		table.createTable(5, 5)
+
 		expect(table.getTableDiameters()).to.deep.equal({ width: 5, height: 5 })
 	})
 })

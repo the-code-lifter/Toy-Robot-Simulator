@@ -11,23 +11,29 @@ describe('Robot', () => {
 		direction: 'NORTH',
 	}
 
+	const currentPositionDefault = {
+		x: '',
+		y: '',
+		direction: '',
+	}
+
 	describe('On initialization currentPosition', () => {
 		const robot = new Robot()
 
-		it('should be an Object with property x set to an empty string', () => {
+		it('should have x property set to a empty string', () => {
 			expect(robot.currentPosition.x).to.equal('')
 		})
 
-		it('should be an Object with property y set to an empty string', () => {
+		it('should have y property set to a empty string', () => {
 			expect(robot.currentPosition.y).to.equal('')
 		})
 
-		it('should be an Object with property direction set to an empty string', () => {
+		it('should have direction property set to a empty string', () => {
 			expect(robot.currentPosition.direction).to.equal('')
 		})
 	})
 
-	it('place method assigns placement directions to this.currentPosition', () => {
+	it('place method assigns directions to this.currentPosition', () => {
 		const robot = new Robot()
 
 		robot.place(place)
@@ -36,13 +42,13 @@ describe('Robot', () => {
 	})
 
 	describe('hasBeenPlaced method', () => {
-		it('if place method has not been called it should return false', () => {
+		it('place method has not been called it should return false', () => {
 			const robot = new Robot()
 
 			expect(robot.hasBeenPlaced()).to.be.false
 		})
 
-		it('if place method has been called it should return true', () => {
+		it('place method has been called it should return true', () => {
 			const robot = new Robot()
 
 			robot.place(place)
@@ -52,22 +58,27 @@ describe('Robot', () => {
 	})
 
 	describe('move method', () => {
-		it('if place method has not been called it should not move', () => {
+		it('place method has not been called it should not move', () => {
 			const robot = new Robot()
+
 			robot.move()
-			expect(robot.currentPosition).to.deep.equal(robot.currentPosition)
+
+			expect(robot.currentPosition).to.deep.equal(currentPositionDefault)
 		})
 
 		it('should not move robot if table parameter is undefined', () => {
 			const robot = new Robot()
+
 			robot.place(place)
 			robot.move()
-			expect(robot.currentPosition).to.deep.equal(robot.currentPosition)
+
+			expect(robot.currentPosition).to.deep.equal(place)
 		})
 
 		it('should move robot one unit forward', () => {
 			const robot = new Robot()
 			const table = new Table()
+
 			table.createTable(5, 5)
 
 			robot.place(place)
@@ -94,7 +105,7 @@ describe('Robot', () => {
 		it('should not move robot if you are going to fall off the table', () => {
 			const robot = new Robot()
 			const table = new Table()
-			let placeOffTable = {
+			let tablePlace = {
 				x: '1',
 				y: '1',
 				direction: 'NORTH',
@@ -102,28 +113,28 @@ describe('Robot', () => {
 
 			table.createTable(1, 1)
 
-			robot.place(placeOffTable)
+			robot.place(tablePlace)
 			robot.move(table)
 
 			expect(robot.currentPosition.y).to.equal('1')
 
-			robot.place({ ...placeOffTable, direction: 'EAST' })
+			robot.place({ ...tablePlace, direction: 'EAST' })
 			robot.move(table)
 
 			expect(robot.currentPosition.x).to.equal('1')
 
-			placeOffTable = {
+			tablePlace = {
 				x: '0',
 				y: '0',
 				direction: 'SOUTH',
 			}
 
-			robot.place(placeOffTable)
+			robot.place(tablePlace)
 			robot.move(table)
 
 			expect(robot.currentPosition.y).to.equal('0')
 
-			robot.place({ ...placeOffTable, direction: 'WEST' })
+			robot.place({ ...tablePlace, direction: 'WEST' })
 			robot.move(table)
 
 			expect(robot.currentPosition.x).to.equal('0')
@@ -131,13 +142,16 @@ describe('Robot', () => {
 	})
 
 	describe('report method', () => {
-		const write = process.stdout.write
+		let write
 
+		beforeEach(() => {
+			write = process.stdout.write
+		})
 		afterEach(() => {
 			process.stdout.write = write
 		})
 
-		it('report method should output current position to the terminal', () => {
+		it('should output current position to the terminal', () => {
 			const robot = new Robot()
 			process.stdout.write = (message) => {}
 			let spy = sinon.spy(process.stdout, 'write')
@@ -149,6 +163,7 @@ describe('Robot', () => {
 			})
 
 			robot.report()
+
 			expect(spy.called).to.be.true
 		})
 	})
@@ -160,23 +175,21 @@ describe('Robot', () => {
 			direction: 'NORTH',
 		}
 
-		it('if place method has not been called it should not move', () => {
+		it('place method has not been called it should not turn', () => {
 			const robot = new Robot()
+
 			robot.turn('LEFT')
-			expect(robot.currentPosition).to.deep.equal({
-				x: '',
-				y: '',
-				direction: '',
-			})
+
+			expect(robot.currentPosition).to.deep.equal(currentPositionDefault)
 		})
 
 		it('when LEFT is passed as a parameter should rotate direction', () => {
+			const robot = new Robot()
 			let placeDirections = {
 				x: '0',
 				y: '0',
 				direction: 'NORTH',
 			}
-			const robot = new Robot()
 
 			robot.place(placeDirections)
 
@@ -198,12 +211,12 @@ describe('Robot', () => {
 		})
 
 		it('when RIGHT is passed as a parameter should rotate direction', () => {
+			const robot = new Robot()
 			let placeDirections = {
 				x: '0',
 				y: '0',
 				direction: 'NORTH',
 			}
-			const robot = new Robot()
 
 			robot.place(placeDirections)
 
