@@ -1,6 +1,6 @@
 const chai = require('chai')
 const path = require('path')
-const filePath = path.join(__dirname, './files/commands.txt')
+const filePath = path.join(__dirname, './Files/example.txt')
 const FileReader = require('../Models/FileReader')
 const expect = chai.expect
 
