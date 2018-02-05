@@ -4,7 +4,7 @@
 	"description": "This is a simulation of a toy robot moving on a square tabletop with the dimensions of 5 units x 5 units.",
 	"main": "index.js",
 	"scripts": {
-		"test": "nyc --reporter=text mocha ./**/*.test.js"
+		"test": "nyc --reporter=text ./node_modules/mocha/bin/mocha ./**/*.test.js"
 	},
 	"keywords": [
 		"toy",
