@@ -17,7 +17,7 @@ const isValidPlace = (place, table, robot) => {
 	if (x > width - 1 || x < 0) return false
 	if (y > height - 1 || y < 0) return false
 
-	if (directionsAllowed.indexOf(direction) === -1) return false
+	if (!directionsAllowed.includes(direction)) return false
 
 	return true
 }
@@ -35,7 +35,10 @@ const runCommand = (command, table, robot) => {
 
 	if (command.indexOf('PLACE') > -1) {
 		const placementDirections = getPlacementDirections(command)
-		if (isValidPlace(placementDirections, table)) return robot.place(placementDirections)
+
+		return isValidPlace(placementDirections, table)
+			? robot.place(placementDirections)
+			: robot.resetPlace()
 	}
 
 	if (command.indexOf('LEFT') > -1 || command.indexOf('RIGHT') > -1) return robot.turn(command)

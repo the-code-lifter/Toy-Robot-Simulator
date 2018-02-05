@@ -36,6 +36,15 @@ describe('runCommand', () => {
 		expect(spy.called).to.be.true
 	})
 
+	it('if command is a type of PLACE and is not valid it should call robot.resetPlace method', () => {
+		const robot = { resetPlace: (params) => {} }
+		const spy = sinon.spy(robot, 'resetPlace')
+
+		runCommand('PLACE -1,1,PINK', table, robot)
+
+		expect(spy.called).to.be.true
+	})
+
 	it('if command is a type of LEFT or RIGHT command and is valid it should call robot.place method', () => {
 		const robot = { turn: (params) => {} }
 		const spy = sinon.spy(robot, 'turn')

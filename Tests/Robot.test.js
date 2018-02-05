@@ -41,6 +41,15 @@ describe('Robot', () => {
 		expect(robot.currentPosition).to.deep.equal(place)
 	})
 
+	it('resetPlace method sets this.currentPosition back to its default value', () => {
+		const robot = new Robot()
+
+		robot.place(place)
+		robot.resetPlace()
+
+		expect(robot.currentPosition).to.deep.equal(currentPositionDefault)
+	})
+
 	describe('hasBeenPlaced method', () => {
 		it('place method has not been called it should return false', () => {
 			const robot = new Robot()

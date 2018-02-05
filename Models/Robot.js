@@ -17,6 +17,14 @@ module.exports = class Robot {
 		this.currentPosition = placementDirections
 	}
 
+	resetPlace() {
+		this.currentPosition = {
+			x: '',
+			y: '',
+			direction: '',
+		}
+	}
+
 	move(table) {
 		if (!this.hasBeenPlaced) return
 		if (table === undefined) return
