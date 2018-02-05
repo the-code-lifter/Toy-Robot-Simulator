@@ -27,17 +27,16 @@ module.exports = class Robot {
 
 		switch (this.currentPosition.direction) {
 			case 'NORTH':
-				this.currentPosition.y =
-					y === table.height - 1 ? this.currentPosition.y : (y + 1).toString()
+				this.currentPosition.y = y >= table.height - 1 ? this.currentPosition.y : (y + 1).toString()
 				break
 			case 'SOUTH':
-				this.currentPosition.y = y === 0 ? this.currentPosition.y : (y - 1).toString()
+				this.currentPosition.y = y <= 0 ? this.currentPosition.y : (y - 1).toString()
 				break
 			case 'EAST':
-				this.currentPosition.x = x === table.width - 1 ? this.currentPosition.x : (x + 1).toString()
+				this.currentPosition.x = x >= table.width - 1 ? this.currentPosition.x : (x + 1).toString()
 				break
 			case 'WEST':
-				this.currentPosition.x = x === 0 ? this.currentPosition.x : (x - 1).toString()
+				this.currentPosition.x = x <= 0 ? this.currentPosition.x : (x - 1).toString()
 				break
 		}
 	}

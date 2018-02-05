@@ -100,7 +100,7 @@ describe('Robot', () => {
 				direction: 'NORTH',
 			}
 
-			table.createTable(2, 2)
+			table.createTable(1, 1)
 
 			robot.place(placeOffTable)
 			robot.move(table)
