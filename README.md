@@ -7,7 +7,6 @@ Description:
 that would result in the robot falling from the table must be prevented, however further valid movement commands must still
 be allowed.
 
-
 * Create an application that can read in commands of the following form -
 ```
 PLACE X,Y,F
@@ -27,6 +26,8 @@ REPORT
 * A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT and REPORT commands.
 * Input can be from a file, or from standard input, as the developer chooses.
 * Provide test data to exercise the application.
+
+
 
 
 Constraints:
