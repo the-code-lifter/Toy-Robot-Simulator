@@ -91,4 +91,4 @@ To run the tests for this application you just need to run this command `npm tes
 
 ## Authors
 
-* **Jake Rossi** - *Initial work* - [PurpleBooth](https://github.com/the-code-lifter)
+* **Jake Rossi** - [The Code Lifter](https://github.com/the-code-lifter)
