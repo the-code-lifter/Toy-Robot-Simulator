@@ -9,6 +9,7 @@ module.exports = class Robot {
 
 	hasBeenPlaced() {
 		const { x, y, direction } = this.currentPosition
+
 		return !(x === '' && y === '' && direction === '')
 	}
 
