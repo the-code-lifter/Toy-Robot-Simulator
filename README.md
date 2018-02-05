@@ -89,6 +89,6 @@ Node >= v8.9.4
 
 To run the tests for this application you just need to run this command `npm test`
 
-## Authors
+## Author
 
-* **Jake Rossi** - [The Code Lifter](https://github.com/the-code-lifter)
+**Jake Rossi** - [The Code Lifter](https://github.com/the-code-lifter)
