@@ -1,5 +1,12 @@
+const fileNames = [ 'example1', 'example2', 'example3', 'example4' ]
+let argPassed = 'example1'
+
+if (fileNames.includes(process.argv[2])) {
+	argPassed = process.argv[2]
+}
+
 const path = require('path')
-const filePath = path.join(__dirname, './commands.txt')
+const filePath = path.join(__dirname, `./Files/${argPassed}.txt`)
 const FileReader = require('./Models/FileReader')
 const Table = require('./Models/Table')
 const Robot = require('./Models/Robot')
