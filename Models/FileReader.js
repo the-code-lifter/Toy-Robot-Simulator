@@ -1,19 +1,17 @@
-const fs = require('fs'),
-	path = require('path'),
-	filePath = path.join(__dirname, '../commands.txt')
+const fs = require('fs')
 
 module.exports = class FileReader {
 	constructor() {
 		this.file = null
 	}
 
-	loadFile(cb) {
+	loadFile(filePath, cb) {
 		fs.readFile(filePath, { encoding: 'utf-8' }, (err, commands) => {
 			if (!err) {
 				this.setData(commands)
 				cb()
 			} else {
-				throw Error(err)
+				throw new Error(err)
 			}
 		})
 	}
