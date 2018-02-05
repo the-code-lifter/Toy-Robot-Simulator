@@ -1,5 +1,7 @@
 const chai = require('chai')
 const sinon = require('sinon')
+const path = require('path')
+const filePath = path.join(__dirname, './files/commands.txt')
 const FileReader = require('../Models/FileReader')
 const expect = chai.expect
 
@@ -9,11 +11,23 @@ describe('FileReader', () => {
 		expect(fileReader.file).to.be.null
 	})
 
-	it('loadFile method should return Callback once file has been loaded', () => {
-		const fileReader = new FileReader()
-		const stub = sinon.stub(fileReader, 'loadFile').returns(cb)
-		console.log(fileReader.loadFile())
-		// expect(cb.called).to.be.true
+	describe('loadFile method', () => {
+		it('should return loaded file in a callback', (done) => {
+			const fileReader = new FileReader()
+			fileReader.loadFile(filePath, () => {
+				expect(fileReader.file).to.equal('PLACE 0,0,NORTH')
+				done()
+			})
+		})
+
+		it('should throw error if file can not be loaded', () => {
+			const fileReader = new FileReader()
+			try {
+				fileReader.loadFile('')
+			} catch (err) {
+				expect(err).to.be.a(Error)
+			}
+		})
 	})
 
 	it('setData method should set this.file', () => {
