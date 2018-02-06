@@ -1,8 +1,8 @@
-const fileNames = [ 'example1', 'example2', 'example3', 'example4' ]
+const fileNames = ['example1', 'example2', 'example3', 'example4']
 let argPassed = 'example1'
 
 if (fileNames.includes(process.argv[2])) {
-	argPassed = process.argv[2]
+  argPassed = process.argv[2]
 }
 
 const path = require('path')
@@ -17,9 +17,9 @@ const table = new Table()
 const robot = new Robot()
 
 fileReader.loadFile(filePath, () => {
-	const commands = fileReader.getData()
-	table.createTable(5, 5)
-	const arrayOfCommands = splitCommandsIntoArray(commands)
+  const commands = fileReader.getData()
+  table.createTable(5, 5)
+  const arrayOfCommands = splitCommandsIntoArray(commands)
 
-	arrayOfCommands.forEach((command) => runCommand(command, table, robot))
+  arrayOfCommands.forEach(command => runCommand(command, table, robot))
 })
