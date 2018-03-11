@@ -58,38 +58,24 @@ module.exports = class Robot {
 	}
 
 	turn(rotation) {
-		if (!this.hasBeenPlaced) return
+		if (!this.hasBeenPlaced()) return
 
-		if (rotation === 'LEFT') {
-			switch (this.currentPosition.direction) {
-				case 'NORTH':
-					this.currentPosition.direction = 'WEST'
-					break
-				case 'EAST':
-					this.currentPosition.direction = 'NORTH'
-					break
-				case 'SOUTH':
-					this.currentPosition.direction = 'EAST'
-					break
-				case 'WEST':
-					this.currentPosition.direction = 'SOUTH'
-					break
+		const left = {
+				north: 'WEST',
+				east: 'NORTH',
+				south: 'EAST',
+				west: 'SOUTH',
+			},
+			right = {
+				north: 'EAST',
+				east: 'SOUTH',
+				south: 'WEST',
+				west: 'NORTH',
 			}
-		} else {
-			switch (this.currentPosition.direction) {
-				case 'NORTH':
-					this.currentPosition.direction = 'EAST'
-					break
-				case 'EAST':
-					this.currentPosition.direction = 'SOUTH'
-					break
-				case 'SOUTH':
-					this.currentPosition.direction = 'WEST'
-					break
-				case 'WEST':
-					this.currentPosition.direction = 'NORTH'
-					break
-			}
-		}
+
+		this.currentPosition.direction =
+			rotation === 'LEFT'
+				? left[this.currentPosition.direction.toLowerCase()]
+				: right[this.currentPosition.direction.toLowerCase()]
 	}
 }
