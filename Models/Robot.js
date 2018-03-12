@@ -26,7 +26,7 @@ module.exports = class Robot {
 	}
 
 	move(table) {
-		if (!this.hasBeenPlaced) return
+		if (!this.hasBeenPlaced()) return
 		if (table === undefined) return
 
 		let { x, y, direction } = this.currentPosition
@@ -34,7 +34,7 @@ module.exports = class Robot {
 		x = parseInt(x)
 		y = parseInt(y)
 
-		switch (this.currentPosition.direction) {
+		switch (direction) {
 			case 'NORTH':
 				this.currentPosition.y = y >= table.height - 1 ? this.currentPosition.y : (y + 1).toString()
 				break
